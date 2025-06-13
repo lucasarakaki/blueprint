@@ -4,16 +4,18 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 
-class UserFactory extends Factory
+class PostFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Post::class;
 
     /**
      * Define the model's default state.
@@ -21,10 +23,11 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
-            'email' => fake()->safeEmail(),
-            'password' => fake()->password(),
+            'title' => fake()->sentence(4),
+            'slug' => fake()->slug(),
+            'content' => fake()->paragraphs(3, true),
+            'user_id' => User::factory(),
+            'tag_id' => Tag::factory(),
         ];
     }
 }
