@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Model
+class Category extends Model
 {
     use HasFactory;
 
@@ -17,17 +18,7 @@ class User extends Model
      */
     protected $fillable = [
         'name',
-        'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
+        'user_id',
     ];
 
     /**
@@ -39,16 +30,17 @@ class User extends Model
     {
         return [
             'id' => 'integer',
+            'user_id' => 'integer',
         ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
-    }
-
-    public function categories(): HasMany
-    {
-        return $this->hasMany(Category::class);
     }
 }
