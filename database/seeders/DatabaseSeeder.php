@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Tag;
-use App\Models\Post;
-use App\Models\User;
-use App\Models\Comment;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Task;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,8 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory( 10 )->create();
-        Post::factory( 10 )->create();
-        Comment::factory( 10 )->create();
-        Tag::factory( 10 )->create();
+        Category::factory( 5 )->create();
+        Task::factory( 10 )->create();
     }
 }
